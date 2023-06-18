@@ -1,0 +1,22 @@
+{
+  "name": "vue-remote-iframe-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 5002 --strict-port",
+    "build": "vue-tsc && vite build",
+    "preview": "vite preview --port 5002 --strict-port",
+    "serve": "vite serve --port 5002 --strict-port"
+  },
+  "dependencies": {
+    "vue": "^3.2.47"
+  },
+  "devDependencies": {
+    "@originjs/vite-plugin-federation": "^1.2.3",
+    "@vitejs/plugin-vue": "^4.1.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.3.9",
+    "vue-tsc": "^1.4.2"
+  }
+}
