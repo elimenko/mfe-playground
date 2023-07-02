@@ -1,18 +1,11 @@
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
 import './App.css'
+import { ErrorBoundary } from "react-error-boundary";
 
-import AppWrapper from 'remoteVueApp/AppWrapper'
+import MFRemoteApp from './MFRemoteApp';
 
 function App() {
   const [count, setCount] = useState(0)
-  const vueMFRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (vueMFRef.current) {
-      console.log('Ref: ', vueMFRef.current);
-      AppWrapper(vueMFRef.current);
-    }
-  }, [vueMFRef.current]);
 
   return (
     <>
@@ -25,8 +18,12 @@ function App() {
       <div>
         <h2>Microfrontends</h2>
         <div className="mfe-grid">
-          <iframe src="http://myapp.localhost" title="microfrontend1"></iframe>
-          <div id="vue-mf-app" ref={vueMFRef}></div>
+          <ErrorBoundary fallback={<div>Couldn't load IFrame MFE</div>}>
+            <iframe src="http://myapp.localhost" title="microfrontend1"></iframe>
+          </ErrorBoundary>
+          <ErrorBoundary fallback={<div>Couldn't load Module Federation MFE</div>}>
+            <MFRemoteApp rootCounter={count}/>
+          </ErrorBoundary>
         </div>
       </div>
     </>
