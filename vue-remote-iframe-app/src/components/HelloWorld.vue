@@ -1,15 +1,44 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 defineProps<{ msg: string }>()
 
 const count = ref(0)
+
+function onClickCounter() {
+  count.value++
+  console.log(count.value)
+  document.cookie = `counter=${count.value}; SameSite=None; Secure`;
+}
+
+function getCookie(name: string) {
+    var cookieArr = document.cookie.split(";");
+
+    for(var i = 0; i < cookieArr.length; i++) {
+        var cookiePair = cookieArr[i].split("=");
+
+        /* Removing whitespace at the beginning of the cookie name
+        and compare it with the given string */
+        if(name == cookiePair[0].trim()) {
+            // Decode the cookie value and return
+            return decodeURIComponent(cookiePair[1]);
+        }
+    }
+
+    // Return null if the cookie by the given name does not exist
+    return null;
+}
+
+const countFromCookies = computed(() => {
+  const countDep = count.value;
+  return getCookie('counter') || `${countDep} (no cookie)`
+})
 </script>
 
 <template>
   <h3>{{ msg }}</h3>
   <div class="card">
-    <button type="button" @click="count++">count is {{ count }}</button>
+    <button type="button" @click="onClickCounter">count is {{ countFromCookies }}</button>
   </div>
 </template>
 

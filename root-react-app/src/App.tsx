@@ -25,7 +25,7 @@ function App() {
       <div>
         <h2>Microfrontends</h2>
         <div className="mfe-grid">
-          <iframe src="http://localhost:5001" title="microfrontend1"></iframe>
+          <iframe src="http://myapp.localhost" title="microfrontend1"></iframe>
           <div id="vue-mf-app" ref={vueMFRef}></div>
         </div>
       </div>
