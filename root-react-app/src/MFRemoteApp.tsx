@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, useState } from 'react'
 
 import AppWrapper from 'remoteVueApp/AppWrapper'
 
@@ -8,13 +8,21 @@ interface MFRemoteAppProps {
 
 function MFRemoteApp({ rootCounter }: MFRemoteAppProps) {
   const vueMFRef = useRef<HTMLDivElement>(null);
+  const [vueMFStore, setVueMFStore] = useState<MFRemoteAppProps>();
 
   useEffect(() => {
     if (vueMFRef.current) {
       console.log('Ref: ', vueMFRef.current);
-      AppWrapper(vueMFRef.current, { rootCounter });
+      setVueMFStore(AppWrapper(vueMFRef.current, { rootCounter }) as MFRemoteAppProps);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (vueMFStore) {
+        vueMFStore.rootCounter = rootCounter;
     }
   }, [rootCounter]);
+
 
   return (
     <div id="vue-mf-app" ref={vueMFRef}></div>

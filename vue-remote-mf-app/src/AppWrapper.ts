@@ -10,4 +10,6 @@ export default (el: any, props: any) => {
 
   app.provide('store', store);
   app.mount(el)
+
+  return store;
 }
