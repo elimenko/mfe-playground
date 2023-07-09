@@ -5,8 +5,6 @@ import { IStore } from './wrapperStore';
 
 const count = ref(0)
 const store = inject<IStore>('store');
-
-console.log(count)
 </script>
 
 <template>

@@ -7,7 +7,6 @@ const count = ref(0)
 
 function onClickCounter() {
   count.value++
-  console.log(count.value)
   document.cookie = `counter=${count.value}; SameSite=None; Secure`;
 }
 

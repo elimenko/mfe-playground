@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import './App.css'
-import { ErrorBoundary } from "react-error-boundary";
 
 import MFRemoteApp from './MFRemoteApp';
 
@@ -18,12 +17,8 @@ function App() {
       <div>
         <h2>Microfrontends</h2>
         <div className="mfe-grid">
-          <ErrorBoundary fallback={<div>Couldn't load IFrame MFE</div>}>
-            <iframe src="http://myapp.localhost" title="microfrontend1"></iframe>
-          </ErrorBoundary>
-          <ErrorBoundary fallback={<div>Couldn't load Module Federation MFE</div>}>
-            <MFRemoteApp rootCounter={count}/>
-          </ErrorBoundary>
+          <iframe src="http://myapp.localhost" title="microfrontend1"></iframe>
+          <MFRemoteApp rootCounter={count}/>
         </div>
       </div>
     </>
