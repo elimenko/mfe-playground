@@ -5,11 +5,13 @@
   "type": "module",
   "scripts": {
     "dev": "vite --port 5001 --strict-port",
+    "dev2": "vite --port 5003 --strict-port",
     "build": "vue-tsc && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "vue": "^3.2.47"
+    "vue": "^3.2.47",
+    "vue-cookies": "^1.8.3"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.1.0",

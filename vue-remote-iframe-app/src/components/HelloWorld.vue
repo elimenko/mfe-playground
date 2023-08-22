@@ -7,7 +7,8 @@ const count = ref(0)
 
 function onClickCounter() {
   count.value++
-  document.cookie = `counter=${count.value}; SameSite=None; Secure`;
+  document.cookie = `counter=${count.value}; SameSite=None; Secure; Path=/; Partitioned`;
+  window.localStorage.setItem('counter', count.value.toString());
 }
 
 function getCookie(name: string) {
@@ -32,12 +33,29 @@ const countFromCookies = computed(() => {
   const countDep = count.value;
   return getCookie('counter') || `${countDep} (no cookie)`
 })
+
+const countFromLS = computed(() => {
+  const countDep = count.value;
+  return window.localStorage.getItem('counter') || `${countDep} (no LS)`
+})
+
+const onLSEvent = (e: StorageEvent) => {
+  console.log(`MFE received event: ${e.key} ${e.oldValue} -> ${e.newValue}`);
+}
+
+window.addEventListener('storage', onLSEvent);
+
 </script>
 
 <template>
-  <h3>{{ msg }}</h3>
-  <div class="card">
-    <button type="button" @click="onClickCounter">count is {{ countFromCookies }}</button>
+  <div>
+    <h3>{{ msg }}</h3>
+    <div class="card">
+      <button type="button" @click="onClickCounter">count is {{ countFromCookies }}</button>
+    </div>
+    <div class="card">
+      <button type="button" @click="onClickCounter">count is {{ countFromLS }}</button>
+    </div>
   </div>
 </template>
 
