@@ -1,19 +1,19 @@
 import { useRef, useEffect, useState } from 'react'
 
-interface MFRemoteAppProps {
+interface VueRemoteAppWrapperProps {
     rootCounter: number;
 }
 
-function MFRemoteApp({ rootCounter }: MFRemoteAppProps) {
+function VueRemoteAppWrapper({ rootCounter }: VueRemoteAppWrapperProps) {
   const vueMFRef = useRef<HTMLDivElement>(null);
-  const [vueMFStore, setVueMFStore] = useState<MFRemoteAppProps>();
+  const [vueMFStore, setVueMFStore] = useState<VueRemoteAppWrapperProps>();
   const [mfeError, setMfeError] = useState<string>();
 
   useEffect(() => {
     if (vueMFRef.current) {
         // TODO: Fix TypeScript
         import('remoteVueApp/AppWrapper').then(({ default: AppWrapper }) => {
-            setVueMFStore(AppWrapper(vueMFRef.current, { rootCounter }) as MFRemoteAppProps);
+            setVueMFStore(AppWrapper(vueMFRef.current, { rootCounter }) as VueRemoteAppWrapperProps);
         }).catch((err) => {
             console.error(err);
             setMfeError('Failed to load Vue MFE');
@@ -36,4 +36,4 @@ function MFRemoteApp({ rootCounter }: MFRemoteAppProps) {
   )
 }
 
-export default MFRemoteApp
+export default VueRemoteAppWrapper

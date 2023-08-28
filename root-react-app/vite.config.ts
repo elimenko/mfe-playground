@@ -8,7 +8,11 @@ export default defineConfig({
     name: 'host-app',
     remotes: {
         remoteVueApp: "http://localhost:5002/assets/remoteEntry.js",
+        remoteReactApp: "http://localhost:5004/assets/remoteEntry.js",
     },
-    shared: ['react', 'react-dom']
+    shared: {
+      'react': { requiredVersion: '18.2.0' },
+      'react-dom': { requiredVersion: '18.2.0' }
+    }
   })],
 })

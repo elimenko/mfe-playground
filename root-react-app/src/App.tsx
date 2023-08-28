@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import './App.css'
 
-import MFRemoteApp from './MFRemoteApp';
+import VueRemoteAppWrapper from './VueRemoteAppWrapper';
+import ReactRemoteAppWrapper from './ReactRemoteAppWrapper';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -26,7 +27,8 @@ function App() {
         <div className="mfe-grid">
           <iframe src="http://myapp1.localhost" title="microfrontend1"></iframe>
           <iframe src="http://myapp2.localhost" title="microfrontend2"></iframe>
-          <MFRemoteApp rootCounter={count}/>
+          <VueRemoteAppWrapper rootCounter={count}/>
+          <ReactRemoteAppWrapper rootCounter={count}/>
         </div>
       </div>
     </>
