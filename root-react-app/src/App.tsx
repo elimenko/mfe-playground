@@ -13,6 +13,7 @@ function App() {
 
   window.addEventListener('storage', onLSEvent);
 
+
   return (
     <>
       <h1>Root app</h1>
@@ -24,8 +25,8 @@ function App() {
       <div>
         <h2>Microfrontends</h2>
         <div className="mfe-grid">
-          <iframe src="http://myapp1.localhost" title="microfrontend1"></iframe>
-          <iframe src="http://myapp2.localhost" title="microfrontend2"></iframe>
+          <iframe src="https://myapp1.localhost" title="microfrontend1" id="mfe1"></iframe>
+          <iframe src="https://myapp2.localhost" title="microfrontend2" id="mfe2"></iframe>
           <MFRemoteApp rootCounter={count}/>
         </div>
       </div>
